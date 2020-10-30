@@ -26,7 +26,7 @@ class Spot:
         self.color = WHITE
         self.neighbors = []
         self.width = width
-        self.tota_rows = total_rows
+        self.total_rows = total_rows
 
     def get_pos(self):
         """get position"""
@@ -70,15 +70,16 @@ class Spot:
         self.color = PURPLE
 
     def draw(self, win):
+        """draw a cube"""
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
 
     def update_neighbors(self, grid):
         self.neighbors = []
-        if self.row < self.tota_rows - 1 and not grid[self.row + 1][self.col].is_barrier(): #down
+        if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_barrier(): #down
             self.neighbors.append(grid[self.row + 1][self.col])
         if self.row > 0 and not grid[self.row - 1][self.col].is_barrier(): #up
             self.neighbors.append(grid[self.row - 1][self.col])
-        if self.col < self.tota_rows - 1 and not grid[self.row][self.col + 1].is_barrier(): #right
+        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].is_barrier(): #right
             self.neighbors.append(grid[self.row][self.col + 1])
         if self.col > 0 and not grid[self.row][self.col - 1].is_barrier(): #left
             self.neighbors.append(grid[self.row][self.col - 1])
@@ -217,7 +218,7 @@ def main(win, width):
                 row, col = get_clicked_pos(pos, ROWS, width)
                 spot = grid[row][col]
                 spot.reset()
-                if sport == start:
+                if spot == start:
                     start = None
                 elif spot == end:
                     spot = None
